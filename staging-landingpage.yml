@@ -30,8 +30,8 @@ spec:
       - name: landing-page
         image: 25092018/landing-page:latest"
         ports:
-#        - containerPort: 80
-#        imagePullPolicy: "Always"
+      - containerPort: 80
+        imagePullPolicy: "Always"
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
