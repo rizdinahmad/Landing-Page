@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: landing
-        image: 25092018/landing-page"
+        image: 25092018/landing-page:latest"
         ports:
 #        - containerPort: 80
 #        imagePullPolicy: "Always"
