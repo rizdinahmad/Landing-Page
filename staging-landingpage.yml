@@ -27,7 +27,7 @@ spec:
         app: landing
     spec:
       containers:
-      - name: landing
+      - name: landing-page
         image: 25092018/landing-page:latest"
         ports:
 #        - containerPort: 80
