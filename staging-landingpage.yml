@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: landing
-        image: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME"
+        image: 25092018/landing-page"
         ports:
 #        - containerPort: 80
 #        imagePullPolicy: "Always"
