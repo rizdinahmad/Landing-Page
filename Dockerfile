@@ -2,4 +2,4 @@ FROM nginx
 
 WORKDIR /var/www/html
 
-COPY . .
+COPY . /var/www/html
