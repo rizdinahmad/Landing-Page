@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: landing
-        image: 25092018/landing-page:latest
+        image: 25092018/landing-page:tag
         ports:
         - containerPort: 80
 ---
