@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: landing-service
-  #namespace: staging
+  namespace: staging
 spec:
   ports:
   - port: 80
@@ -15,7 +15,7 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: landing-deployment
-  #namespace: staging
+  namespace: staging
 spec:
   selector:
     matchLabels:
@@ -36,12 +36,12 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: landing-ingress
-  #namespace: staging
+  namespace: staging
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: staginglandingpage.rizdin.online
+  - host: staglandingpage.rizdin.online
     http:
       paths:
       #- path: /
