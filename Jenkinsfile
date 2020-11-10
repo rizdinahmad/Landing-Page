@@ -18,16 +18,16 @@ pipeline {
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 }
             steps {
-                sh "sed -i "s/dev-landingpage:tag/dev-landingpage:$BUILD_NUMBER/g" staging-landingpage.yml"
+                sh ('sed -i "s/landing-page:tag/landing-page:$BUILD_NUMBER/g" staging-landingpage.yml')
                 }
             steps {
-                sh "kubectl apply -f staging-landingpage.yml"
+                sh ('kubectl apply -f staging-landingpage.yml -n staging')
                 }
              steps {
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 }
              steps {
-                sh('kubectl get ingress')
+                sh('kubectl get ingress -n staging')
                 }
         }
     }  
