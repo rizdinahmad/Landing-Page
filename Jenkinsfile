@@ -1,4 +1,4 @@
-env.DOCKER_REGISTRY = 'rizdinahmad'
+env.DOCKER_REGISTRY = '25092018'
 env.DOCKER_IMAGE_NAME = 'stglandingpage'
 pipeline {
     agent any
