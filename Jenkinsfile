@@ -14,19 +14,19 @@ pipeline {
                 }
         }
         stage('Push Image to DockerHub') {
-            steps {                
+            step {                
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 }
-            steps {
-                sh ('sed -i "s/landing-page:tag/landing-page:$BUILD_NUMBER/g" staging-landingpage.yml')
+            step {
+                sh('sed -i "s/landing-page:tag/landing-page:$BUILD_NUMBER/g" staging-landingpage.yml')
                 }
-            steps {
-                sh ('kubectl apply -f staging-landingpage.yml -n staging')
+            step {
+                sh('kubectl apply -f staging-landingpage.yml -n staging')
                 }
-             steps {
+             step {
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 }
-             steps {
+             step {
                 sh('kubectl get ingress -n staging')
                 }
         }
