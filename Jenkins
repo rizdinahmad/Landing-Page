@@ -1,5 +1,5 @@
 env.DOCKER_REGISTRY = 'rizdinahmad'
-env.DOCKER_IMAGE_NAME = 'landingpage'
+env.DOCKER_IMAGE_NAME = 'dev-landingpage'
 pipeline {
     agent any
     
