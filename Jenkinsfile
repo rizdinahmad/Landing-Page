@@ -3,6 +3,11 @@ env.DOCKER_IMAGE_NAME = 'dev-landingpage'
 pipeline {
     agent any
     stages {
+        stage('Git Pull from Github') {
+            steps {
+                git credentialsId: 'githubpass', url: 'https://github.com/rizdinahmad/landing-page.git'
+            }
+        }
         stage('Build Image') {
             steps {
                 sh "docker build --build-arg APP_NAME=$DOCKER_IMAGE_NAME -t $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER ."
