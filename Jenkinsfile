@@ -5,15 +5,30 @@ pipeline {
     stages {
         stage ('credential') {    
             steps {
-                git credentialsId: 'githubpass', url: 'https://github.com/rizdinahmad/landing-page.git'
+                 sh('sed -i "s/tag/$BUILD_NUMBER/g" index.html')
             }}
         stage ('Docker Build'){
             steps {
                 sh "docker build --build-arg APP_NAME=$DOCKER_IMAGE_NAME -t $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER ."
             }}
-        stage ('RUN') {
+        stage ('Docker Push') {
             steps {                
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+        stage ('tagging') {
+            steps {
+                sh('sed -i "s/tag/$BUILD_NUMBER/g" staging-landingpage.yml')
+                }
+           }
+        stage('locate namespace') {
+            steps {
+                sh('sed -i "s/staging/staging/g" staging-landingpage.yml')
+                }
+           }
+        stage('add domain') {
+            steps {
+                sh('sed -i "s//stglandingpage.rizdin.online/g" staging-landingpage.yml')
+                }
+           }
                 sh('kubectl delete -f staging-landingpage.yml')
                 sh('kubectl apply -f staging-landingpage.yml')
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
