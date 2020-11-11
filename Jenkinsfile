@@ -3,7 +3,7 @@ env.DOCKER_IMAGE_NAME = 'stglandingpage'
 pipeline {
     agent any
     stages {
-        stage ('credential') {    
+        stage ('Start') {    
             steps {
                  sh('sed -i "s/tag/$BUILD_NUMBER/g" index.html')
             }}
@@ -14,21 +14,21 @@ pipeline {
         stage ('Docker Push') {
             steps {                
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+            }}
         stage ('tagging') {
             steps {
                 sh('sed -i "s/tag/$BUILD_NUMBER/g" staging-landingpage.yml')
-                }
-           }
+            }}
         stage('locate namespace') {
             steps {
                 sh('sed -i "s/staging/staging/g" staging-landingpage.yml')
-                }
-           }
+            }}
         stage('add domain') {
             steps {
                 sh('sed -i "s//stglandingpage.rizdin.online/g" staging-landingpage.yml')
                 }
-           }
+        stage('Ingress') {
+            steps {
                 sh('kubectl delete -f staging-landingpage.yml')
                 sh('kubectl apply -f staging-landingpage.yml')
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
