@@ -27,12 +27,12 @@ pipeline {
             steps {
                 sh('sed -i "s/stglandingpage.rizdin.online/stglandingpage.rizdin.online/g" staging-landingpage.yml')
             }}
-        stage('Ingress') {
+        stage('Deployment') {
             steps {
                 sh('kubectl apply -f staging-landingpage.yml')
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
             }}
-        stage('add domain') {
+        stage('Ingress') {
             steps {
                 sh "kubectl get ingress -n staging"
             }}
