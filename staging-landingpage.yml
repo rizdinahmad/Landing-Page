@@ -41,7 +41,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: page.rizdin.online
+  - host: stglandingpage.rizdin.online
     http:
       paths:
       #- path: /
