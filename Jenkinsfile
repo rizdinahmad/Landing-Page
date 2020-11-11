@@ -15,7 +15,7 @@ pipeline {
         }
         stage ('Pulling') {
             steps {
-                sh('sed -i "s/tag/$BUILD_NUMBER/g" staging-landingpage.yml')
+                sh('sed -i "s/@/$BUILD_NUMBER/g" staging-landingpage.yml')
                 sh('kubectl apply -f staging-landingpage.yml')
             }
         }
