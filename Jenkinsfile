@@ -3,10 +3,6 @@ env.DOCKER_IMAGE_NAME = 'stglandingpage'
 pipeline {
     agent any
     stages {
-        stage('Deliver for development') {
-            when {
-                branch 'dev' 
-            }
             steps {
                 git credentialsId: 'githubpass', url: 'https://github.com/rizdinahmad/landing-page.git'
             }
@@ -22,4 +18,3 @@ pipeline {
             }
         }
      }
-}
