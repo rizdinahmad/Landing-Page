@@ -26,7 +26,7 @@ pipeline {
         stage('add domain') {
             steps {
                 sh('sed -i "s/stglandingpage.rizdin.online/stglandingpage.rizdin.online/g" staging-landingpage.yml')
-                }
+            }}
         stage('Ingress') {
             steps {
                 sh('kubectl delete -f staging-landingpage.yml')
@@ -34,4 +34,5 @@ pipeline {
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 sh "kubectl get ingress -n staging"
             }}
-    }}
+    }
+}
