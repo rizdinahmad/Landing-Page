@@ -34,7 +34,7 @@ pipeline {
             }}
         stage('add domain') {
             steps {
-                sh('sed -i "s/['namespace: s15ing']/['namespace: staging']/g" staging-landingpage.yml')
+                sh('sed -i "s/namespace: s15ing/namespace: staging/g" staging-landingpage.yml')
                 sh "kubectl get ingress -n staging"
             }}
     }
