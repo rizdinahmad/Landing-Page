@@ -16,9 +16,9 @@ pipeline {
         stage('Push Image to DockerHub') {
             steps {                
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
-                sh "sed '31 !s/tag/$BUILD_NUMBER/g' stglandingpage.yml"
-                sh('kubectl delete -f stglandingpage.yml')
-                sh('kubectl apply -f stglandingpage.yml')
+                sh "sed '31 !s/tag/$BUILD_NUMBER/g' staging-landingpage.yml"
+                sh('kubectl delete -f staging-landingpage.yml')
+                sh('kubectl apply -f staging-landingpage.yml')
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 sh "kubectl get ingress -n staging"
                 }
