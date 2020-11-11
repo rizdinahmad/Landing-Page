@@ -31,6 +31,10 @@ pipeline {
             steps {
                 sh('kubectl apply -f staging-landingpage.yml')
                 sh "docker rmi $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+            }}
+        stage('add domain') {
+            steps {
+                sh('sed -i "s/['namespace: s15ing']/['namespace: staging']/g" staging-landingpage.yml')
                 sh "kubectl get ingress -n staging"
             }}
     }
