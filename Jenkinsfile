@@ -25,7 +25,7 @@ pipeline {
             }}
         stage('add domain') {
             steps {
-                sh('sed -i "s//stglandingpage.rizdin.online/g" staging-landingpage.yml')
+                sh('sed -i "s/stglandingpage.rizdin.online/stglandingpage.rizdin.online/g" staging-landingpage.yml')
                 }
         stage('Ingress') {
             steps {
