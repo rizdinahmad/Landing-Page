@@ -3,15 +3,15 @@ env.DOCKER_IMAGE_NAME = 'stglandingpage'
 pipeline {
     agent any
     stages {
-        stage {    
+        stage ('credential') {    
             steps {
                 git credentialsId: 'githubpass', url: 'https://github.com/rizdinahmad/landing-page.git'
             }}
-        stage {
+        stage ('Docker Build'){
             steps {
                 sh "docker build --build-arg APP_NAME=$DOCKER_IMAGE_NAME -t $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER ."
             }}
-        stage {
+        stage ('RUN') {
             steps {                
                 sh "docker push $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
                 sh('kubectl delete -f staging-landingpage.yml')
