@@ -1,7 +1,11 @@
 env.DOCKER_REGISTRY = '25092018'
 env.DOCKER_IMAGE_NAME = 'stglandingpage'
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'dev'
+        }
+    }
     stages {
         stage ('Start') {    
             steps {
